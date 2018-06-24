@@ -2114,6 +2114,14 @@ declare module "child_process" {
     import * as stream from "stream";
     import * as net from "net";
 
+    export type ChildProcessSpawnError = Error & {
+        errno: string,
+        code: string,
+        syscall: string,
+        path: string,
+        spawnargs: Array<string>
+    }
+
     export interface ChildProcess extends events.EventEmitter {
         stdin: stream.Writable;
         stdout: stream.Readable;
@@ -2142,7 +2150,7 @@ declare module "child_process" {
         addListener(event: string, listener: (...args: any[]) => void): this;
         addListener(event: "close", listener: (code: number, signal: string) => void): this;
         addListener(event: "disconnect", listener: () => void): this;
-        addListener(event: "error", listener: (err: Error) => void): this;
+        addListener(event: "error", listener: (err: ChildProcessSpawnError) => void): this;
         addListener(event: "exit", listener: (code: number, signal: string) => void): this;
         addListener(event: "message", listener: (message: any, sendHandle: net.Socket | net.Server) => void): this;
 
@@ -2156,28 +2164,28 @@ declare module "child_process" {
         on(event: string, listener: (...args: any[]) => void): this;
         on(event: "close", listener: (code: number, signal: string) => void): this;
         on(event: "disconnect", listener: () => void): this;
-        on(event: "error", listener: (err: Error) => void): this;
+        on(event: "error", listener: (err: ChildProcessSpawnError) => void): this;
         on(event: "exit", listener: (code: number, signal: string) => void): this;
         on(event: "message", listener: (message: any, sendHandle: net.Socket | net.Server) => void): this;
 
         once(event: string, listener: (...args: any[]) => void): this;
         once(event: "close", listener: (code: number, signal: string) => void): this;
         once(event: "disconnect", listener: () => void): this;
-        once(event: "error", listener: (err: Error) => void): this;
+        once(event: "error", listener: (err: ChildProcessSpawnError) => void): this;
         once(event: "exit", listener: (code: number, signal: string) => void): this;
         once(event: "message", listener: (message: any, sendHandle: net.Socket | net.Server) => void): this;
 
         prependListener(event: string, listener: (...args: any[]) => void): this;
         prependListener(event: "close", listener: (code: number, signal: string) => void): this;
         prependListener(event: "disconnect", listener: () => void): this;
-        prependListener(event: "error", listener: (err: Error) => void): this;
+        prependListener(event: "error", listener: (err: ChildProcessSpawnError) => void): this;
         prependListener(event: "exit", listener: (code: number, signal: string) => void): this;
         prependListener(event: "message", listener: (message: any, sendHandle: net.Socket | net.Server) => void): this;
 
         prependOnceListener(event: string, listener: (...args: any[]) => void): this;
         prependOnceListener(event: "close", listener: (code: number, signal: string) => void): this;
         prependOnceListener(event: "disconnect", listener: () => void): this;
-        prependOnceListener(event: "error", listener: (err: Error) => void): this;
+        prependOnceListener(event: "error", listener: (err: ChildProcessSpawnError) => void): this;
         prependOnceListener(event: "exit", listener: (code: number, signal: string) => void): this;
         prependOnceListener(event: "message", listener: (message: any, sendHandle: net.Socket | net.Server) => void): this;
     }
