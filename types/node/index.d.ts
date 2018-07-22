@@ -2119,8 +2119,8 @@ declare module "child_process" {
         code: string,
         syscall: string,
         path: string,
-        spawnargs: Array<string>
-    }
+        spawnargs: string[]
+    };
 
     export interface ChildProcess extends events.EventEmitter {
         stdin: stream.Writable;
